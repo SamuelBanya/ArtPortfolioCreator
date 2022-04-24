@@ -157,6 +157,9 @@ def main():
             f.write('</div>')
             # Seal off 'content' based div tag
             f.write('</div>')
+            f.write('<br />')
+            f.write('<br />')
+            f.write('<br />')
             f.write('<!-- Fancybox JS Script via CDN: -->')
             f.write('<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>')
             f.write('</body>')
