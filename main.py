@@ -156,79 +156,53 @@ def main():
         f.write('<!DOCTYPE html>')
         f.write('<html>')
         f.write('<head>')
-        f.write('<title>Art Portfolio</title>')
-        f.write('<meta charset="utf-8"/>')
-        # f.write('<link rel="stylesheet" href="https://musimatic.xyz/css/artgallery.css" type="text/css"/>')
-        f.write('<link rel="stylesheet" href="./css/artportfolio.css" type="text/css"/>')        
-        f.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>')        
-        f.write('<link rel="shortcut icon" type="image/ico" href="favicon/artportfolio.ico"/>')
+        f.write('<meta charset="UTF-8"/>')
+        f.write('<title>SamBanya.com: Art Portfolio Site Of Sam Banya</title>')
+        f.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>')
+        f.write('<link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>')
+        f.write('<link rel="stylesheet" href="css/site.css"/>')
         f.write('</head>')        
         f.write('<body>')
-        print('CREATING LEFT MENU')
-        f.write('<div id="left_menu">')
-        f.write('<h1>Art Portfolio</h1>')
-        # f.write('<a href="http://www.musimatic.xyz">BACK TO HOMEPAGE</a>')
-        f.write('<a href="' + str(WEBSITE_FULL_ADDRESS) + '">BACK TO HOMEPAGE</a>')
-        current_date_eastern = pendulum.now('America/New_York').format('dddd, MMMM D, YYYY')
-        current_time_eastern = pendulum.now('America/New_York').format('hh:mm:ss A')        
-        f.write('<p>Last Time Updated:</p>')
-        f.write('<p>' + str(current_date_eastern) + ' at ' + str(current_time_eastern) + ' EDT</p>')
-        # f.write('<a href="https://git.musimatic.xyz/ArtGalleryCreator/tree/">Source Code Link</a>')
-        f.write('<a href="https://github.com/SamuelBanya/ArtPortfolioCreator">Source Code Link</a>')
+        f.write('<div id="navbarDiv">')
+        f.write('<ul>')
+	f.write('<li class="navbar"><a href="https://www.sambanya.com/index.html">Portfolio</a></li>')
+	f.write('<li class="navbar"><a href="https://www.sambanya.com/artgallery.html">Art Gallery</a></li>')
+	f.write('<li class="navbar"><a href="https://www.sambanya.com/music.html">Music</a></li>')
+        f.write('</ul>')
+        f.write('</div>')
         f.write('<br />')
-        f.write('<h2>Sections</h2>')
-        # art_gallery_path = '/var/www/musimatic/images/ArtGallery'
+        f.write('<div id="content">')
+        current_date_eastern = pendulum.now('America/New_York').format('dddd, MMMM D, YYYY')
+        current_time_eastern = pendulum.now('America/New_York').format('hh:mm:ss A')
+        print('Last Time Updated:')
+        print(str(current_date_eastern) + ' at ' + str(current_time_eastern))
         os.chdir(art_portfolio_path)
-        # Adding revision so that latest artwork shows up on top of gallery page:
-        # https://docs.python.org/3/howto/sorting.html
         picture_directories = sorted(filter(os.path.isdir, os.listdir(art_portfolio_path)), reverse=True)
         for directory in picture_directories:
-            picture_directory_anchor = str('<a href="#' + str(directory) + '">' + str(directory) + '</a>')
-            f.write(picture_directory_anchor)
-            f.write('<br />')
-        f.write('</div>')
-
-        print('CREATING IMAGE GALLERY FOR RIGHT SIDE')
-        f.write('<div id="right_art_portfolio">')
-
-        print('WORKING ON CREATING IMG TAGS')
-        for directory in picture_directories:
-            picture_directory_header = str('<h1 id="' + str(directory) + '">' + str(directory) + '</h1>')
-            f.write(picture_directory_header)
-            f.write('<br />')
-            # SO Post on Globs:
-            # https://stackoverflow.com/questions/4568580/python-glob-multiple-filetypes
             picture_paths_jpg = (x.resolve() for x in Path(directory).glob("*.jpg"))
             picture_paths_png = (x.resolve() for x in Path(directory).glob("*.png"))
-            # TODO: Once I fix the 'create_thumbnails_gifs()' function, return to this:
-            # picture_paths_gif = (x.resolve() for x in Path(directory).glob("*.gif"))            
-            # picture_paths = itertools.chain(picture_paths_jpg, picture_paths_png, picture_paths_gif)
             picture_paths = itertools.chain(picture_paths_jpg, picture_paths_png)
-            # SO Post on string replacement:
-            # https://stackoverflow.com/questions/9452108/how-to-use-string-replace-in-python-3-x            
-            # picture_paths_strings = [str(p).replace('/var/www/musimatic/', 'https://musimatic.xyz/') for p in picture_paths]
-            picture_paths_strings = [str(p) for p in picture_paths]            
-            # pprint.pprint(picture_paths_strings)   
+            picture_paths_strings = [str(p) for p in picture_paths]
+            f.write('<div class="flex flex-wrap gap-5 justify-center max-w-5xl mx-auto px-6">')
             for picture_path in picture_paths_strings:
                 current_filename = PosixPath(picture_path).name
                 current_stem = PosixPath(picture_path).stem
                 current_parent = PosixPath(picture_path).parent
-                # regular_image_version = str(picture_path).replace('/var/www/musimatic/', 'https://musimatic.xyz/')
                 regular_image_version = str(picture_path).replace(str(WEBSITE_PATH + '/'), str(WEBSITE_ADDRESS + '/'))
                 thumb_image_version = str(str(current_parent) + '/thumbs/thumb_' + current_filename)
-                # thumb_image_version = str(thumb_image_version).replace('/var/www/musimatic/', 'https://musimatic.xyz/')
                 thumb_image_version = str(thumb_image_version).replace(str(WEBSITE_PATH + '/'), str(WEBSITE_ADDRESS + '/'))
                 print('thumb_image_version: ' + str(thumb_image_version))
                 picture_img_tag = str('<a data-fancybox="gallery" href="' + str(regular_image_version) + '" data-fancybox="' + str(current_filename) + '" data-caption="' + str(current_filename) + '"><img src="' + str(thumb_image_version) + '"/></a>')
                 f.write(picture_img_tag)
-        # Sealing off right side of page's div tag for the image gallery portion:
-        f.write('</div>')
-        f.write('<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>')
-        # f.write('<script type="text/javascript" src="https://musimatic.xyz/js/artgallery.js"></script>')
-        f.write('<script type="text/javascript" ' + 'src="' + str(WEBSITE_ADDRESS) + '/js/artportfolio.js"></script>')
-        f.write('</body>')
-        f.write('</html>')
-        print('ART PORTFOLIO COMPLETE!')
+            # Seal off picture based div tag section
+            f.write('</div>')
+            # Seal off 'content' based div tag
+            f.write('</div>')
+            f.write('<!-- Fancybox JS Script via CDN: -->')
+            f.write('<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>')
+            f.write('</body>')
+            f.write('</html>')
+            print('ART PORTFOLIO COMPLETE!')
 
         
 if __name__ == '__main__':
