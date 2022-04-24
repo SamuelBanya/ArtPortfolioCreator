@@ -79,59 +79,12 @@ def create_thumbnails():
             # if not thumbnails/image.ext:
             if not thumb_image_version_exists:
                 print('Creating new thumbnail image...')
-                # create_thumbnail(path_to_image, thumbnail_path)                        
-                # with Image(filename = picture_path) as image:
-                # https://www.geeksforgeeks.org/wand-thumbnail-function-python/
                 with wand_image(filename = picture_path) as image:
                     with image.clone() as thumbnail:
                         thumbnail.thumbnail(175, 150)
                         thumbnail.save(filename=thumb_image_version)
 
-                        
-def create_thumbnails_gifs():
-    print('CALLING create_thumbnails() FUNCTION...')
-    os.chdir(art_portfolio_path)
-    picture_directories = list(filter(os.path.isdir, os.listdir(art_portfolio_path)))
-    for directory in picture_directories:
-        print('Checking for thumbnails directory')
-        # thumbs_path = str('/var/www/musimatic/images/ArtGallery/' + str(directory) + '/thumbs')
-        thumbs_path = str(str(art_portfolio_path) + "/" + str(directory) + '/thumbs')
-        print('thumbs_path: ' + str(thumbs_path))
-        # Check if a thumbnails directory exist
-        thumbs_path_exists = Path(thumbs_path).exists()
-        if thumbs_path_exists:
-            print('thumbs_path_exists is true: thumbnail directory exists')
-        # if not thumbails directory:  
-        if not thumbs_path_exists:
-            print('thumbs_path_exists is false: thumbnail directory does NOT exist')
-            # mkdir thumbnails
-            Path(thumbs_path).mkdir()
-        # Create globs for each file type
-        picture_paths_gif = (x.resolve() for x in Path(directory).glob("*.gif"))
-        picture_paths = itertools.chain(picture_paths_gif)
-        picture_paths_strings = [str(p) for p in picture_paths]
-        # Cycle through each picture_path string
-        print('Cycling through each picture_path string')
-        for picture_path in picture_paths_strings:
-            # Use PosixPath() to split path parts accordingly
-            current_filename = PosixPath(picture_path).name
-            current_stem = PosixPath(picture_path).stem
-            current_parent = PosixPath(picture_path).parent
-            print('current_filename: ' + str(current_filename))
-            print('current_stem: ' + str(current_stem))
-            print('current_parent: ' + str(current_parent))
-            thumb_image_version = str(str(current_parent) + '/thumbs/thumb_' + current_filename)
-            thumb_image_version_exists = Path(thumb_image_version).exists()
-            print('thumb_image_version: ' + str(thumb_image_version))
-            print('thumb_image_version_exists: ' + str(thumb_image_version_exists))
-            # if not thumbnails/image.ext:
-            if not thumb_image_version_exists:
-                print('Creating new thumbnail gif image...')
-                # Taken from this SO post:
-                # https://stackoverflow.com/questions/9988517/resize-gif-animation-pil-imagemagick-python
-                # TODO: Create thumbnail versions of GIF images
 
-                
 def main():
     # Create CSS style sheet using project's example:
     # https://stackoverflow.com/questions/55600606/how-can-i-create-a-css-file-in-python
@@ -151,7 +104,7 @@ def main():
     shutil.copyfile(str(PROJECT_DIRECTORY) + '/artportfolio.ico', favicon_file_path)
     
     print('CALLING main() FUNCTION...')
-    # with open('/var/www/musimatic/pythonprojectwebsites/ArtGallery/artgallery.html', 'w') as f:    
+    # with open('/var/www/musimatic/pythonprojectwebsites/ArtGallery/artgallery.html', 'w') as f:
     with open(str(WEBSITE_PATH) + '/index.html', 'w') as f:
         f.write('<!DOCTYPE html>')
         f.write('<html>')
@@ -161,7 +114,7 @@ def main():
         f.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>')
         f.write('<link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>')
         f.write('<link rel="stylesheet" href="css/site.css"/>')
-        f.write('</head>')        
+        f.write('</head>')
         f.write('<body>')
         f.write('<div id="navbarDiv">')
         f.write('<ul>')
@@ -204,9 +157,8 @@ def main():
             f.write('</html>')
             print('ART PORTFOLIO COMPLETE!')
 
-        
+
 if __name__ == '__main__':
     create_art_portfolio()
     create_thumbnails()
-    # create_thumbnails_gifs()
     main()
