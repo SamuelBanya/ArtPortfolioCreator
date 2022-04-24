@@ -151,7 +151,7 @@ def main():
                 thumb_image_version = str(str(current_parent) + '/thumbs/thumb_' + current_filename)
                 thumb_image_version = str(thumb_image_version).replace(str(WEBSITE_PATH + '/'), str(WEBSITE_ADDRESS + '/'))
                 print('thumb_image_version: ' + str(thumb_image_version))
-                picture_img_tag = str('<a data-fancybox="gallery" href="' + str(regular_image_version) + '" data-fancybox="' + str(current_filename) + '" data-caption="' + str(current_filename) + '"><img src="' + str(thumb_image_version) + '"/></a>')
+                picture_img_tag = str('<a data-fancybox="gallery" href="' + str(regular_image_version) + '" data-fancybox="' + str(current_filename) + '" data-caption="' + str(current_filename) + '"><img class="rounded" src="' + str(thumb_image_version) + '"/></a>')
                 f.write(picture_img_tag)
             # Seal off picture based div tag section
             f.write('</div>')
