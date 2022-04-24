@@ -92,7 +92,10 @@ def main():
         # stylesheet.write(cssTextDecoded)
     # https://www.geeksforgeeks.org/python-copy-contents-of-one-file-to-another-file/
     # Copy over the 'artgallery.css' file from the project to the user's '/css/artgallery.css' file using 'WEBSITE_PATH"
+    print('PROJECT_DIRECTORY: ' + str(PROJECT_DIRECTORY))    
+    print('WEBSITE_PATH: ' + str(WEBSITE_PATH))
     css_file_path = str(WEBSITE_PATH + '/css/artportfolio.css')
+    print('css_file_path: ' + str(css_file_path))
     shutil.copyfile(str(PROJECT_DIRECTORY) + '/artportfolio.css', css_file_path)
 
     # Create JS script for art gallery page using project's example:
