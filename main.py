@@ -116,7 +116,7 @@ def main():
         f.write('<title>SamBanya.com: Art Portfolio Site Of Sam Banya</title>')
         f.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>')
         f.write('<link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>')
-        f.write('<link rel="stylesheet" href="css/site.css"/>')
+        f.write('<link rel="stylesheet" href="css/artportfolio.css"/>')
         f.write('</head>')
         f.write('<body>')
         f.write('<div id="navbarDiv">')
