@@ -26,6 +26,7 @@
 #navbarDiv a {
   text-decoration: none;
   color: white;
+  font-family: Georgia;  
 }
 
 #navbarDiv a:hover {
