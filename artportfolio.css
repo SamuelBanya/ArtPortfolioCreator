@@ -1,6 +1,4 @@
-/* 
-   References:
-   - https://ghanhass.github.io/myfiddle/336
-   - https://codepen.io/eHtmlu/pen/BaodGVp
-   - https://www.quackit.com/html/html_editors/scratchpad/?example=/css/grid/examples/photo_gallery_auto-fill_evenly_sized_images
-*/
+navbarDiv ul {
+  Margin: 16px 0px;
+  padding: 0 0 0 40px;
+}
