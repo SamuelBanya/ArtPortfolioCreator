@@ -50,7 +50,7 @@ def create_thumbnails():
         thumbs_path_exists = Path(thumbs_path).exists()
         if thumbs_path_exists:
             print('thumbs_path_exists is true: thumbnail directory exists')
-        # if not thumbails directory:  
+        # if not thumbails directory:
         if not thumbs_path_exists:
             print('thumbs_path_exists is false: thumbnail directory does NOT exist')
             # mkdir thumbnails
@@ -92,7 +92,7 @@ def main():
         # stylesheet.write(cssTextDecoded)
     # https://www.geeksforgeeks.org/python-copy-contents-of-one-file-to-another-file/
     # Copy over the 'artgallery.css' file from the project to the user's '/css/artgallery.css' file using 'WEBSITE_PATH"
-    print('PROJECT_DIRECTORY: ' + str(PROJECT_DIRECTORY))    
+    print('PROJECT_DIRECTORY: ' + str(PROJECT_DIRECTORY))
     print('WEBSITE_PATH: ' + str(WEBSITE_PATH))
     css_file_path = str(WEBSITE_PATH + '/css/artportfolio.css')
     print('css_file_path: ' + str(css_file_path))
@@ -101,11 +101,11 @@ def main():
     # Create JS script for art gallery page using project's example:
     js_file_path = str(WEBSITE_PATH + '/js/artportfolio.js')
     shutil.copyfile(str(PROJECT_DIRECTORY) + '/artportfolio.js', js_file_path)
-    
+
     # Create favicon:
     favicon_file_path = str(WEBSITE_PATH + '/favicon/artportfolio.ico')
     shutil.copyfile(str(PROJECT_DIRECTORY) + '/artportfolio.ico', favicon_file_path)
-    
+
     print('CALLING main() FUNCTION...')
     # with open('/var/www/musimatic/pythonprojectwebsites/ArtGallery/artgallery.html', 'w') as f:
     with open(str(WEBSITE_PATH) + '/index.html', 'w') as f:
@@ -123,13 +123,14 @@ def main():
         f.write('<ul>')
         f.write('<li class="navbar"><a href="https://www.sambanya.com/index.html">Portfolio</a></li>')
         f.write('<li class="navbar"><a href="https://www.sambanya.com/artgallery.html">Art Gallery</a></li>')
+        f.write('<li class="navbar"><a href="https://www.sambanya.com/twitter.html">Twitter</a></li>')
         f.write('<li class="navbar"><a href="https://www.sambanya.com/music.html">Music</a></li>')
         f.write('</ul>')
         f.write('</div>')
         f.write('<br />')
         f.write('<br />')
         f.write('<br />')
-        f.write('<br />')        
+        f.write('<br />')
         f.write('<div id="content">')
         current_date_eastern = pendulum.now('America/New_York').format('dddd, MMMM D, YYYY')
         current_time_eastern = pendulum.now('America/New_York').format('hh:mm:ss A')
